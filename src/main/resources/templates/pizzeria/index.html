@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/fragments :: head"></head>
+<body>
+	<header th:insert="fragments/navbar :: navbar"></header>
+  
+	<main class="container">
+	   <div class="row">
+		 <div class="col p-4">
+		   <th:block th:if="${pizzas.size() > 0}">
+			  <h1 class="mb-4">List of available pizzas</h1>
+			  <div class="card" style="width: 18rem;">
+				<div th:each="pizza : ${pizzas}">
+					<div class="card-image p-1">
+				       <img class="img-fluid" th:src="${pizza.foto}"> </img>
+					</div>
+					<div class="card-body">
+			          <h5 th:text="${pizza.name}" class="card-title"></h5>
+			        </div>
+			        <ul class="list-group list-group-flush">
+			          <li th:text="'Prezzo: ' + ${pizza.price} + '€'" class="list-group-item"></li>
+			        </ul>
+			        <div class="card-body">
+			          <a th:href="@{/pizzas/{id}(id=${pizza.id})}" class="card-link">show</a>
+			          <a href="#" class="card-link">delete</a>
+					  <hr class="my-4">
+				    </div>
+					</div>
+		            </div>
+		   </th:block>
+		  
+		   <th:block th:unless="${pizzas.size() > 0}">
+			  <h3>Sorry, there are no pizzas available</h3>
+		   </th:block>
+	     </div>
+	   </div>
+	</main> 
+  
+  <th:block th:replace="fragments/fragments :: scripts"></th:block>
+</body>
+</html>
