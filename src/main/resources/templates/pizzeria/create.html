@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/fragments :: head"></head>
+<body>
+	<header th:insert="fragments/navbar :: navbar"></header>
+  
+	<main class="container d-flex justify-content-center">
+	   <div class="row">
+		 <div class="col mt-4">
+			  <h2 class="mb-4 fw-bold text-uppercase">Create your pizza</h2>
+			  <form 
+			       id="pizza-form"
+			       th:object="${pizza}"
+			       th:action="@{/pizzas/create}" 
+				   method="POST">
+				   
+			      <div class="mb-3">
+			          <label for="name" class="form-label">Pizza name</label>
+			          <input type="text" class="form-control" id="name" placeholder="Choose your pizza name" th:field="*{name}" th:errorClass="is-invalid">
+					  
+					  <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+					     <ul>
+					        <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+					     </ul>
+			          </div>
+					  
+			      </div>  
+			      <div class="mb-3">
+			          <label for="description" class="form-label">Pizza ingredients</label>
+			          <input type="text" class="form-control" id="description" placeholder="List ingredients..." th:field="*{description}" th:errorClass="is-invalid">
+			      
+					  <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+	                     <ul>
+					        <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+					  	 </ul>
+					  </div>
+				  
+				  </div>
+			      <div class="mb-3">
+			         <label for="price" class="form-label">Pizza price</label>
+			         <input type="text" class="form-control" id="price" placeholder="Choose the price" th:field="*{price}" th:errorClass="is-invalid">
+		          
+					 <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+					 	 <ul>
+					 		 <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+					 	 </ul>
+					 </div>
+				 
+				 </div>
+				  <div class="mb-4 d-flex justify-content-between">
+					 <input type="reset" class="btn btn-warning" value="Delete">
+					 <input type="submit" class="btn btn-primary" value="Create pizza">
+				  </div>
+			  </form>
+	     </div>
+	   </div>
+	</main> 
+  
+  <th:block th:replace="fragments/fragments :: scripts"></th:block>
+</body>
+</html>

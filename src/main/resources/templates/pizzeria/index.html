@@ -4,12 +4,15 @@
 <body>
 	<header th:insert="fragments/navbar :: navbar"></header>
   
-	<main class="container">
+	<main class="container d-flex justify-content-center">
 	   <div class="row">
 		 <div class="col p-4">
 		   <th:block th:if="${pizzas.size() > 0}">
-			  <h1 class="mb-4">List of available pizzas</h1>
-			  <div class="card" style="width: 18rem;">
+			  <h2 class="mb-4 fw-bold text-uppercase">List of available pizzas</h2>
+			  <div class="mb-4 d-flex">
+				  <a th:href="@{pizzas/create}" class="me-auto btn btn-info">Create your pizza</a>
+			  </div>
+			  <div class="card m-auto" style="width: 18rem;">
 				<div th:each="pizza : ${pizzas}">
 					<div class="card-image p-1">
 				       <img class="img-fluid" th:src="${pizza.foto}"> </img>
@@ -22,6 +25,7 @@
 			        </ul>
 			        <div class="card-body">
 			          <a th:href="@{/pizzas/{id}(id=${pizza.id})}" class="card-link">show</a>
+					  <a href="#" class="card-link">edit</a>
 			          <a href="#" class="card-link">delete</a>
 					  <hr class="my-4">
 				    </div>

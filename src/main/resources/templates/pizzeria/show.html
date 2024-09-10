@@ -4,10 +4,11 @@
 <body>
 	<header th:insert="fragments/navbar :: navbar"></header>
   
-	<main class="container">
+	<main class="container d-flex justify-content-center">
 	   <div class="row">
 		 <div class="col mt-4">
-			  <div class="card" style="width: 18rem;">
+			  <h2 class="mb-4 fw-bold text-uppercase">Your order</h2>
+			  <div class="card m-auto" style="width: 18rem;">
 			     <div>
 			     <div class="card-image p-1">
 			  	     <img class="img-fluid" th:src="${pizza.foto}"> </img>
@@ -22,6 +23,7 @@
 			  	 <div class="card-body">
 					<a href="#" class="card-link">order</a>
 					<a href="#" class="card-link">delete</a>
+					<a th:href="@{/pizzas}" class="card-link">back</a>
 			     </div>
 		       </div>
 	       </div>

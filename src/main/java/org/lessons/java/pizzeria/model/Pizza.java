@@ -8,6 +8,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 //entity = crea una relazione con il DB
 @Entity
@@ -18,11 +22,23 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 	  
+    @NotNull
+    @Size(min=5, max=250)
 	@Column(name ="name", nullable = false)
 	private String name;
+    
+    @NotNull
+    @Size(min=5, max=250)
+    @Column(name ="description", nullable = false)
 	private String description;
+    
     private String foto;
-	private float price;
+	
+    @NotNull
+    @DecimalMax("30.00")
+    @DecimalMin("5.00")
+    @Column(name ="price", nullable = false)
+    private float price;
 
     private LocalDateTime updatedAt;
   
