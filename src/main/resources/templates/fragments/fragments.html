@@ -13,8 +13,10 @@
    </th:block>
 </head>
 <body>
-<div>
 
+<div th:fragment="successAlert(message)" class="alert alert-success alert-dismissible fade show" role="alert">
+	<span th:text="${message}"></span>
+	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div> 
 
 <th:block th:fragment="scripts">

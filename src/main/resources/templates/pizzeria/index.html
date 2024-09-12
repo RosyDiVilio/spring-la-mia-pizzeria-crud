@@ -9,6 +9,9 @@
 		 <div class="col p-4">
 		   <th:block th:if="${pizzas.size() > 0}">
 			  <h2 class="mb-4 fw-bold text-uppercase">List of available pizzas</h2>
+			  <th:block th:if="${successMessage != null}">
+			  		<div th:replace="fragments/fragments :: successAlert(${successMessage})"></div>
+			  </th:block>
 			  <div class="mb-4 d-flex">
 				  <a th:href="@{pizzas/create}" class="me-auto btn btn-info">Create your pizza</a>
 			  </div>
@@ -24,10 +27,39 @@
 			          <li th:text="'Prezzo: ' + ${pizza.price} + '€'" class="list-group-item"></li>
 			        </ul>
 			        <div class="card-body">
-			          <a th:href="@{/pizzas/{id}(id=${pizza.id})}" class="card-link">show</a>
-					  <a href="#" class="card-link">edit</a>
-			          <a href="#" class="card-link">delete</a>
-					  <hr class="my-4">
+			          
+					  <a th:href="@{/pizzas/{id}(id=${pizza.id})}" class="btn btn btn-info">Show</a>
+					  
+					  <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn btn-warning">Edit</a>
+			          
+					  <!-- Button trigger modal -->
+					  <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${pizza.id}">
+					    Delete
+					  </button>
+
+					  <!-- Modal -->
+					  <div class="modal fade" th:id="'delete-modal-' + ${pizza.id}" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+					    <div class="modal-dialog">
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <h1 class="modal-title fs-5" id="exampleModalLabel">Deleting pizza...</h1>
+					          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					        </div>
+					        <div class="modal-body">
+					          Are you sure you want to delete [[ ${pizza.name} ]]?
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							  <form class="d-inline-block" th:action="@{/pizzas/delete/{id}(id=${pizza.id})}" method="POST">
+							  	   <button type="submit" class="btn btn-danger ml-3">Delete</button> 
+							  </form>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+					  
+					  
+					<hr class="my-4">
 				    </div>
 					</div>
 		            </div>
