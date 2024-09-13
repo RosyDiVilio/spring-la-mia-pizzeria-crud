@@ -32,32 +32,9 @@
 					  
 					  <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn btn-warning">Edit</a>
 			          
-					  <!-- Button trigger modal -->
-					  <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#delete-modal-' + ${pizza.id}">
-					    Delete
-					  </button>
-
-					  <!-- Modal -->
-					  <div class="modal fade" th:id="'delete-modal-' + ${pizza.id}" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
-					    <div class="modal-dialog">
-					      <div class="modal-content">
-					        <div class="modal-header">
-					          <h1 class="modal-title fs-5" id="exampleModalLabel">Deleting pizza...</h1>
-					          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					        </div>
-					        <div class="modal-body">
-					          Are you sure you want to delete [[ ${pizza.name} ]]?
-					        </div>
-					        <div class="modal-footer">
-					          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							  <form class="d-inline-block" th:action="@{/pizzas/delete/{id}(id=${pizza.id})}" method="POST">
-							  	   <button type="submit" class="btn btn-danger ml-3">Delete</button> 
-							  </form>
-					        </div>
-					      </div>
-					    </div>
-					  </div>
-					  
+					  <form class="d-inline-block" th:action="@{/pizzas/delete/{id}(id=${pizza.id})}" method="POST">
+					  	   <button type="submit" class="btn btn-danger ml-3" onclick="return confirm('Are you sure you want to delete this pizza?')">Delete</button> 
+					  </form>
 					  
 					<hr class="my-4">
 				    </div>
